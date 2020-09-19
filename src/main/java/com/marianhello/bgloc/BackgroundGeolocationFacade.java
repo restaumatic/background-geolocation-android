@@ -51,12 +51,6 @@ public class BackgroundGeolocationFacade {
     public static final int SERVICE_STOPPED = 0;
     public static final int AUTHORIZATION_AUTHORIZED = 1;
     public static final int AUTHORIZATION_DENIED = 0;
-
-    public static final String[] PERMISSIONS = {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
-
     private boolean mServiceBroadcastReceiverRegistered = false;
     private boolean mLocationModeChangeReceiverRegistered = false;
     private boolean mIsPaused = false;
@@ -215,7 +209,13 @@ public class BackgroundGeolocationFacade {
         logger.debug("Starting service");
 
         PermissionManager permissionManager = PermissionManager.getInstance(getContext());
-        permissionManager.checkPermissions(Arrays.asList(PERMISSIONS), new PermissionManager.PermissionRequestListener() {
+        ArrayList<String> permissions = new ArrayList<String>();
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= 29){
+            permissions.add(Manifest.permission.ACTIVITY_RECOGNITION);
+        }
+        permissionManager.checkPermissions(permissions, new PermissionManager.PermissionRequestListener() {
             @Override
             public void onPermissionGranted() {
                 logger.info("User granted requested permissions");
@@ -409,7 +409,13 @@ public class BackgroundGeolocationFacade {
     }
 
     public boolean hasPermissions() {
-        return hasPermissions(getContext(), PERMISSIONS);
+        ArrayList<String> permissions = new ArrayList<String>();
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (Build.VERSION.SDK_INT >= 29){
+            permissions.add(Manifest.permission.ACTIVITY_RECOGNITION);
+        }
+        return hasPermissions(getContext(), (String[]) permissions.toArray());
     }
 
     public boolean locationServicesEnabled() throws PluginException {
