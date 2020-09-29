@@ -7,8 +7,9 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.Looper;
-
+import java.util.ArrayList;
 import com.github.jparkie.promise.Promise;
 import com.github.jparkie.promise.Promises;
 import com.intentfilter.androidpermissions.PermissionManager;

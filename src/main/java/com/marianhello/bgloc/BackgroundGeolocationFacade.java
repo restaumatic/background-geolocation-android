@@ -17,7 +17,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
-
+import java.util.ArrayList;
 import com.github.jparkie.promise.Promise;
 import com.intentfilter.androidpermissions.PermissionManager;
 import com.marianhello.bgloc.data.BackgroundActivity;
