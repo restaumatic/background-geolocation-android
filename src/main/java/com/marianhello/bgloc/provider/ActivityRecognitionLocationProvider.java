@@ -237,7 +237,7 @@ public class ActivityRecognitionLocationProvider extends AbstractLocationProvide
         public void onReceive(Context context, Intent intent) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
             if (result == null) {
-                logger.debug("ActivityRecognitionResult is null");
+                logger.error("ActivityRecognitionResult is null");
                 return;
             }
             ArrayList<DetectedActivity> detectedActivities = (ArrayList) result.getProbableActivities();
