@@ -415,7 +415,7 @@ public class BackgroundGeolocationFacade {
         if (Build.VERSION.SDK_INT >= 29){
             permissions.add(Manifest.permission.ACTIVITY_RECOGNITION);
         }
-        return hasPermissions(getContext(), (String[]) permissions.toArray());
+        return hasPermissions(getContext(), permissions.toArray(new String[permissions.size()]));
     }
 
     public boolean locationServicesEnabled() throws PluginException {
